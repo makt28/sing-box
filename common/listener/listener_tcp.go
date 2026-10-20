@@ -37,6 +37,7 @@ func (l *Listener) ListenTCP() (net.Listener, error) {
 	if l.listenOptions.ReuseAddr {
 		listenConfig.Control = control.Append(listenConfig.Control, control.ReuseAddr())
 	}
+	listenConfig.Control = control.Append(listenConfig.Control, shareUIDControl())
 	if l.listenOptions.DisableTCPKeepAlive {
 		listenConfig.KeepAlive = -1
 		listenConfig.KeepAliveConfig.Enable = false
